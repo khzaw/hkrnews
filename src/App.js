@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import api from './api';
 import StoryItem from './StoryItem';
 import Spinner from './Spinner';
 import Menu from './Menu';
+
+const Main = styled.main`
+  max-width: 960px;
+  margin: 0 auto;
+`;
 
 const App = () => {
   const [topStoriesId, setTopStoriesId] = useState([]);
@@ -17,7 +23,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <Main>
       <Menu />
       {topStoriesId ? (
         topStoriesId.map((storyId, index) => (
@@ -26,7 +32,7 @@ const App = () => {
       ) : (
         <Spinner />
       )}
-    </div>
+    </Main>
   );
 };
 
