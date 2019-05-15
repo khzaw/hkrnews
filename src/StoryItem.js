@@ -35,7 +35,9 @@ const StoryItem = ({ itemId }) => {
     <>
       {storyItem ? (
         <Wrapper>
-          <Title href={storyItem.url}>{storyItem.title}</Title>
+          <Title href={storyItem.url} target="_blank">
+            {storyItem.title}
+          </Title>
         </Wrapper>
       ) : (
         <Spinner />

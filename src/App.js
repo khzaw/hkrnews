@@ -12,21 +12,24 @@ const Main = styled.main`
 `;
 
 const App = () => {
-  const [topStoriesId, setTopStoriesId] = useState([]);
+  const [storiesId, setStoriesId] = useState([]);
+  const [activeItem, setActiveItem] = useState('top');
+
+  const handleClick = activeItem => () => setActiveItem(activeItem);
 
   useEffect(() => {
-    const fetchTopStories = async () => {
-      const response = await api.get('/topstories.json');
-      setTopStoriesId(response.data);
+    const fetchStories = async (endpoint = `/${activeItem}stories.json`) => {
+      const response = await api.get(endpoint);
+      setStoriesId(response.data);
     };
-    fetchTopStories();
-  }, []);
+    fetchStories();
+  }, [activeItem]);
 
   return (
     <Main>
-      <Menu />
-      {topStoriesId ? (
-        topStoriesId.map((storyId, index) => (
+      <Menu activeItem={activeItem} onClick={handleClick} />
+      {storiesId ? (
+        storiesId.map((storyId, index) => (
           <StoryItem itemId={storyId} key={index} />
         ))
       ) : (

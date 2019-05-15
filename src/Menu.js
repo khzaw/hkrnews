@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Nav = styled.nav`
   display: flex;
@@ -14,43 +14,43 @@ const UL = styled.ul`
 `;
 
 const Li = styled.li`
+  cursor: pointer;
   float: left;
   margin-right: 1rem;
   &:last-child {
     margin-right: 0;
   }
+  ${({ active }) =>
+    active &&
+    css`
+      a {
+        font-weight: bold;
+      }
+    `}
 `;
 
 const A = styled.a`
   text-decoration: none;
-  cursor: pointer;
+  text-transform: capitalize;
 `;
 
 const Img = styled.img``;
 
-const Menu = () => {
+const Menu = ({ activeItem, onClick }) => {
+  const titles = ['top', 'new', 'best', 'ask', 'show', 'job'];
   return (
     <Nav>
       <Img src="https://news.ycombinator.com/y18.gif" alt="Logo" />
       <UL>
-        <Li>
-          <A>Top</A>
-        </Li>
-        <Li>
-          <A>New</A>
-        </Li>
-        <Li>
-          <A>Best</A>
-        </Li>
-        <Li>
-          <A>Ask</A>
-        </Li>
-        <Li>
-          <A>Show</A>
-        </Li>
-        <Li>
-          <A>Job</A>
-        </Li>
+        {titles.map((title, index) => (
+          <Li
+            key={index}
+            active={activeItem === title}
+            onClick={onClick(title)}
+          >
+            <A>{title}</A>
+          </Li>
+        ))}
       </UL>
     </Nav>
   );
