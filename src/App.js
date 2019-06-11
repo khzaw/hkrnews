@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import api from './api';
-import StoryItem from './StoryItem';
-import Spinner from './Spinner';
-import Menu from './Menu';
+import api from "./api";
+import StoryItem from "./StoryItem";
+import Spinner from "./Spinner";
+import Menu from "./Menu";
 
 const Main = styled.main`
   max-width: 960px;
@@ -13,7 +13,7 @@ const Main = styled.main`
 
 const App = () => {
   const [storiesId, setStoriesId] = useState([]);
-  const [activeItem, setActiveItem] = useState('top');
+  const [activeItem, setActiveItem] = useState("top");
 
   const handleClick = activeItem => () => setActiveItem(activeItem);
 
